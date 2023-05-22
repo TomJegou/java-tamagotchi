@@ -3,8 +3,9 @@ package com.ynov.tamagotchi;
 public class tamagotchi {
     String name;
     int happiness;
-    boolean hunger;
     int cleanness;
+    boolean hunger;
+    boolean sick;
 
     public void Eat(){
         this.hunger = false;
@@ -17,6 +18,9 @@ public class tamagotchi {
         }
     }
 
+    public void Nurse(){
+        this.sick = false;
+    }
 }
 
 
