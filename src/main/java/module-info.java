@@ -1,4 +1,4 @@
 module com.ynov.tamagotchi {
-    requires javafx.controls;
+    requires transitive javafx.controls;
     exports com.ynov.tamagotchi;
 }
