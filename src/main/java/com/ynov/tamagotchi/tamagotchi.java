@@ -21,6 +21,22 @@ public class tamagotchi {
     public void Nurse(){
         this.sick = false;
     }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public int getHappiness() {
+        return this.happiness;
+    }
+
+    public boolean getHunger() {
+        return this.hunger;
+    }
+
+    public boolean isSick() {
+        return this.sick;
+    }
 }
 
 
