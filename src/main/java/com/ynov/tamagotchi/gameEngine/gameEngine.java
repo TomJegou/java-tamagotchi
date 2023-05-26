@@ -44,7 +44,7 @@ public class gameEngine {
                     checkLifeStageTransition();
                     break;
                 case ADULT:
-                    System.out.printlntamagotchi.name + " est adulte.");
+                    System.out.println(tamagotchi.name + " est adulte.");
                     tamagotchi.feed();
                     tamagotchi.play();
                     checkLifeStageTransition();
