@@ -1,3 +1,4 @@
 #home-title {
-    -fx-text-fill: red;
+    -fx-text-fill: black;
+    -fx-alignment: center;
 }
