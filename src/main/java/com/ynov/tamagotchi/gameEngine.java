@@ -1,5 +1,7 @@
 package com.ynov.tamagotchi;
 
+import java.util.Scanner;
+
 import java.util.concurrent.TimeUnit;
 
 public class gameEngine {
@@ -13,6 +15,9 @@ public class gameEngine {
     private LifeStage currentStage;
     private int dayCounter = 0;
     private int timeCounter = 0;
+    Tamagotchi tamagotchi = new Tamagotchi();
+    Scanner scanner = new Scanner(System.in);
+
 
 
     public void incrementDay() {
@@ -54,10 +59,10 @@ public class gameEngine {
     
             switch (choice) {
                 case 1:
-                    feed();
+                    tamagotchi.Eat();
                     break;
                 case 2:
-                    play();
+                    tamagotchi.Play();
                     break;
                 case 3:
                     gameRunning = false;
@@ -84,9 +89,11 @@ public class gameEngine {
                     System.out.println(tamagotchi.getName() + " est mort.");
                     restart();
                     break;
+                default:
+                    break;
             }
     
-            incrementTime();
+            incrementDay();
         }
     }
     
@@ -109,9 +116,8 @@ public class gameEngine {
         System.out.println(tamagotchi.name + ": nouvel œuf.");
         currentStage = LifeStage.EGG;
         tamagotchi.happiness = 15;
-        tamagotchi.cleanliness = 0;
-        tamagotchi.hunger = 0;
-        tamagotchi.isSick = false;
+        tamagotchi.hunger = false;
+        tamagotchi.sick = false;
     }
 
     public static void main(String[] args) {
