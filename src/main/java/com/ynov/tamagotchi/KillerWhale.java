@@ -1,5 +1,5 @@
 package com.ynov.tamagotchi;
 
-public class KillerWhale extends tamagotchi {
+public class KillerWhale extends Tamagotchi {
     
 }
