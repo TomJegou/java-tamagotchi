@@ -1,6 +1,6 @@
 package com.ynov.tamagotchi;
 
-public class tamagotchi {
+public class Tamagotchi {
     String name;
     int happiness;
     int cleanness;
