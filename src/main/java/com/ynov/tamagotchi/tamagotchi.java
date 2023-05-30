@@ -2,7 +2,7 @@ package com.ynov.tamagotchi;
 
 public class Tamagotchi {
     String name;
-    int happiness;
+    int happiness = 15;
     int cleanness;
     boolean hunger;
     boolean sick;

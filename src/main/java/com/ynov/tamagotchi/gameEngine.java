@@ -18,8 +18,10 @@ public class gameEngine {
     Tamagotchi tamagotchi = new Tamagotchi();
     Scanner scanner = new Scanner(System.in);
 
+    random instantiator = new random();
+    Tamagotchi randomTamagotchi = random.getRandomTamagotchi();
 
-
+    
     public void incrementDay() {
         timeCounter++;
         if (timeCounter == 2) {
@@ -28,7 +30,6 @@ public class gameEngine {
             System.out.println("Jour " + dayCounter);
         }
     }
-
     public static void wait(int unitTime)
     {
         try {
@@ -39,16 +40,17 @@ public class gameEngine {
     }
 
     public void startGame() {
+        String name = randomTamagotchi.getClass().getSimpleName();
         System.out.println("Bienvenue dans le jeu Tamagotchi !");
-        System.out.println("Nom du Tamagotchi : " + tamagotchi.getName());
-        
-        System.out.println(tamagotchi.getName() + " est un œuf.");
+        System.out.println("Nom du Tamagotchi : " + name);
+        System.out.println(name + " est un œuf.");
         wait(1);
         currentStage = LifeStage.BABY;
         boolean gameRunning = true;
-    
+        System.out.println(name + " est maintenat un Bébé.");
+
         while (gameRunning) {
-            System.out.println("\nQue voulez-vous faire avec " + tamagotchi.getName() + " ?");
+            System.out.println("\nQue voulez-vous faire avec " + name + " ?");
             System.out.println("1. Manger");
             System.out.println("2. Jouer");
             System.out.println("3. Quitter");
@@ -74,19 +76,19 @@ public class gameEngine {
     
             switch (currentStage) {
                 case BABY:
-                    System.out.println(tamagotchi.getName() + " est un bébé.");
+                    System.out.println(name + " est un bébé.");
                     checkLifeStageTransition();
                     break;
                 case ADULT:
-                    System.out.println(tamagotchi.getName() + " est adulte.");
+                    System.out.println(name + " est adulte.");
                     checkLifeStageTransition();
                     break;
                 case ELDERLY:
-                    System.out.println(tamagotchi.getName() + " est un vieillard.");
+                    System.out.println(name + " est un vieillard.");
                     checkLifeStageTransition();
                     break;
                 case DEAD:
-                    System.out.println(tamagotchi.getName() + " est mort.");
+                    System.out.println(name + " est mort.");
                     restart();
                     break;
                 default:
@@ -113,7 +115,8 @@ public class gameEngine {
     }
 
     private void restart() {
-        System.out.println(tamagotchi.name + ": nouvel œuf.");
+        String name = randomTamagotchi.getClass().getSimpleName();
+        System.out.println(name + ": nouvel œuf.");
         currentStage = LifeStage.EGG;
         tamagotchi.happiness = 15;
         tamagotchi.hunger = false;
@@ -121,7 +124,7 @@ public class gameEngine {
     }
 
     public static void main(String[] args) {
-        Tamagotchi tamagotchi = new Tamagotchi();
+        gameEngine gameEngine = new gameEngine();
         gameEngine.startGame();
     }
 }
