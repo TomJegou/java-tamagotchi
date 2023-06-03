@@ -21,4 +21,8 @@ public class SceneLibrary {
         homeScene.getStylesheets().add(HomeCssPath);
         return homeScene;
     }
+
+    // public Scene NewEggScene() {
+
+    // }
 }
