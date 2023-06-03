@@ -1,14 +1,18 @@
 package com.ynov.tamagotchi;
 
+import java.util.Random;
+
 public class Tamagotchi {
     String name;
     int happiness = 15;
-    int cleanness;
-    boolean hunger;
-    boolean sick;
+    boolean cleanness = true ;
+    public int daywhitouteating = 0;
+    boolean eat;
+    boolean sick =false;
 
     public void Eat(){
-        this.hunger = false;
+        this.eat = true;
+        daywhitouteating = 0;
     }
 
     public void Play(){
@@ -17,8 +21,10 @@ public class Tamagotchi {
             this.happiness = 50;
         }
     }
-
-    public void Nurse(){
+    public void cleaning(){
+        this.cleanness = true;
+    }
+    public void Healing(){
         this.sick = false;
     }
 
@@ -26,16 +32,17 @@ public class Tamagotchi {
         return this.name;
     }
 
-    public int getHappiness() {
-        return this.happiness;
-    }
-
-    public boolean getHunger() {
-        return this.hunger;
-    }
-
     public boolean isSick() {
         return this.sick;
+    }
+
+    public void disease(){
+        Random random = new Random();
+        int randomNumber = random.nextInt(3); 
+        if (randomNumber == 0) {
+            this.sick = true;
+            System.out.println("Je suis malade :/");
+        }
     }
 }
 
