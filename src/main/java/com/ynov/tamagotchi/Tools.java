@@ -2,7 +2,7 @@ package com.ynov.tamagotchi;
 
 import java.util.Random;
 
-public class random{
+public class Tools{
     public static void main(String[] args) {
         Tamagotchi randomTamagotchi = getRandomTamagotchi();
         System.out.println("Random Tamagotchi: " + randomTamagotchi.getClass().getSimpleName());
