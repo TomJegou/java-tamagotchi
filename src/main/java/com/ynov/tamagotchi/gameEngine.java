@@ -26,7 +26,6 @@ public class gameEngine {
     Tools instantiator = new Tools();
     Tamagotchi randomTamagotchi = Tools.getRandomTamagotchi();
 
-    
     public void incrementDay() {
         if (tamagotchi.cleanness==false){
             tamagotchi.happiness -=3;
@@ -61,6 +60,7 @@ public class gameEngine {
             System.out.println("Jour " + dayCounter);
         }
     }
+
     public static void wait(int unitTime)
     {
         try {
@@ -158,9 +158,6 @@ public class gameEngine {
             incrementDay();
         }
     }
-    
-
-
 
     private void checkLifeStageTransition() {
         if (tamagotchi.happiness <= 0) {
