@@ -1,6 +1,9 @@
 package com.ynov.tamagotchi;
 
+
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 import java.util.concurrent.TimeUnit;
 
@@ -12,6 +15,8 @@ public class gameEngine {
         ELDERLY,
         DEAD
     }
+    private int unitTime = 4;// you can change this value (this values is the number of possibel action in a day)
+    List<String> Played = new ArrayList<>();
     private LifeStage currentStage;
     private int dayCounter = 0;
     private int timeCounter = 0;
@@ -23,8 +28,34 @@ public class gameEngine {
 
     
     public void incrementDay() {
+        if (tamagotchi.cleanness==false){
+            tamagotchi.happiness -=3;
+        }
+        if (tamagotchi.isSick()) {
+            tamagotchi.happiness -= 5;
+        }
+        if(tamagotchi.happiness <0){
+            currentStage = LifeStage.DEAD;
+        }
+
+        for (int i = Played.size(); i >= 0; i--) {
+            String action = Played.get(i);
+            if( action == "eat"){
+                tamagotchi.cleanness=false;
+            }
+        }
         timeCounter++;
-        if (timeCounter == 2) {
+        if (timeCounter == unitTime) {
+            if(tamagotchi.eat == false){
+                tamagotchi.daywhitouteating += 1;
+                tamagotchi.happiness -= 5*tamagotchi.daywhitouteating;
+            }
+            else{
+                tamagotchi.eat = false;
+            }
+            if (currentStage == LifeStage.ELDERLY){
+                tamagotchi.disease();
+            }
             dayCounter++;
             timeCounter = 0;
             System.out.println("Jour " + dayCounter);
@@ -40,6 +71,7 @@ public class gameEngine {
     }
 
     public void startGame() {
+        System.out.print("\033[H\033[2J");
         String name = randomTamagotchi.getClass().getSimpleName();
         System.out.println("Bienvenue dans le jeu Tamagotchi !");
         System.out.println("Nom du Tamagotchi : " + name);
@@ -51,29 +83,56 @@ public class gameEngine {
 
         while (gameRunning) {
             System.out.println("\nQue voulez-vous faire avec " + name + " ?");
+            System.out.println();
             System.out.println("1. Manger");
             System.out.println("2. Jouer");
-            System.out.println("3. Quitter");
-    
+            System.out.println("3. Nettoyer");
+            System.out.println("4. Soigner");
+            System.out.println("5. Ne rien faire");
+            System.out.println("6. Quitter");
             System.out.print("Votre choix : ");
             int choice = scanner.nextInt();
             scanner.nextLine();
-    
+            
             switch (choice) {
                 case 1:
                     tamagotchi.Eat();
+                    Played.add("eat");
+                    System.out.println();
+                    System.out.println(name+" à bien manger");
                     break;
                 case 2:
                     tamagotchi.Play();
+                    Played.add("play");
+                    System.out.println();
+                    System.out.println("à bien jouer");
                     break;
                 case 3:
+                    tamagotchi.cleaning();
+                    Played.add("clean");
+                    System.out.println();
+                    System.out.println(name+" est tous propre");
+                    break;
+                case 4:
+                    Played.add("heal");
+                    if(currentStage == LifeStage.ELDERLY){
+                        tamagotchi.Healing();
+                    }else{
+                        System.out.println();
+                        System.out.println("il est en pleine santé ! pas besoin de le soigner");
+                    }
+                    break;
+                case 5:
+                    Played.add("nothing");
+                    break;
+                case 6:
                     gameRunning = false;
                     break;
                 default:
                     System.out.println("Choix invalide. Veuillez réessayer.");
                     break;
             }
-    
+            
             switch (currentStage) {
                 case BABY:
                     System.out.println(name + " est un bébé.");
@@ -94,7 +153,8 @@ public class gameEngine {
                 default:
                     break;
             }
-    
+            System.out.println();
+            System.out.println(name + " est à : "+tamagotchi.happiness+" de bonheur");;
             incrementDay();
         }
     }
@@ -105,11 +165,11 @@ public class gameEngine {
     private void checkLifeStageTransition() {
         if (tamagotchi.happiness <= 0) {
             currentStage = LifeStage.DEAD;
-        } else if (currentStage == LifeStage.BABY && tamagotchi.happiness >= 40 && tamagotchi.hunger == false) {
+        } else if (currentStage == LifeStage.BABY && tamagotchi.happiness >= 40 && tamagotchi.eat == true) {
             currentStage = LifeStage.ADULT;
         } else if (currentStage == LifeStage.ADULT && dayCounter > 15) {
             currentStage = LifeStage.ELDERLY;
-        } else if (currentStage == LifeStage.ELDERLY && tamagotchi.isSick()) {
+        } else if (currentStage == LifeStage.ELDERLY && tamagotchi.isSick()==true) {
             currentStage = LifeStage.DEAD;
         }
     }
@@ -119,7 +179,7 @@ public class gameEngine {
         System.out.println(name + ": nouvel œuf.");
         currentStage = LifeStage.EGG;
         tamagotchi.happiness = 15;
-        tamagotchi.hunger = false;
+        tamagotchi.eat = false;
         tamagotchi.sick = false;
     }
 
