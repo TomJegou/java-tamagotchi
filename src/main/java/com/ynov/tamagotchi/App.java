@@ -10,8 +10,10 @@ public class App extends Application {
     public void start(Stage stage) {
         SceneLibrary sceneLibrary = new SceneLibrary();
         Scene homeScene = sceneLibrary.NewHomeScene();
+        Scene eggScene = sceneLibrary.NewEggScene();
         stage.setTitle("Tamagotchi");
         stage.setScene(homeScene);
+        stage.setScene(eggScene);
         stage.show();
     }
 
