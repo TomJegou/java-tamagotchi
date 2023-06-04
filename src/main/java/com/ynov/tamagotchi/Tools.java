@@ -2,14 +2,10 @@ package com.ynov.tamagotchi;
 
 import java.util.Random;
 
-public class random{
-    public static void main(String[] args) {
-        Tamagotchi randomTamagotchi = getRandomTamagotchi();
-        System.out.println("Random Tamagotchi: " + randomTamagotchi.getClass().getSimpleName());
-    }
-
+public class Tools {
+    
     public static Tamagotchi getRandomTamagotchi() {
-        int randomChoice = getRandom();
+        int randomChoice = getRandom(3);
 
         Tamagotchi tamagotchi;  
 
@@ -30,8 +26,8 @@ public class random{
         return tamagotchi;
     }
 
-    public static int getRandom() {
+    public static int getRandom(int max) {
         Random random = new Random();
-        return random.nextInt(3) + 1;
+        return random.nextInt(max) + 1;
     }
 }

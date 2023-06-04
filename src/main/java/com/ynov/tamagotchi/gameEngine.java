@@ -23,8 +23,8 @@ public class gameEngine {
     Tamagotchi tamagotchi = new Tamagotchi();
     Scanner scanner = new Scanner(System.in);
 
-    random instantiator = new random();
-    Tamagotchi randomTamagotchi = random.getRandomTamagotchi();
+    Tools instantiator = new Tools();
+    Tamagotchi randomTamagotchi = Tools.getRandomTamagotchi();
 
     
     public void incrementDay() {
