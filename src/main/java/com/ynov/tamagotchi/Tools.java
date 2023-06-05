@@ -3,12 +3,9 @@ package com.ynov.tamagotchi;
 import java.util.Random;
 
 public class Tools {
-    
     public static Tamagotchi getRandomTamagotchi() {
         int randomChoice = getRandom(3);
-
         Tamagotchi tamagotchi;  
-
         switch (randomChoice) {
             case 1:
                 tamagotchi = new Eagle();
@@ -22,7 +19,6 @@ public class Tools {
             default:
                 throw new IllegalStateException("erreur");
         }
-
         return tamagotchi;
     }
 
