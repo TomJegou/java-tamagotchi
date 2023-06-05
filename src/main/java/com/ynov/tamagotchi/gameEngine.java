@@ -72,7 +72,7 @@ public class gameEngine {
 
     public void startGame() {
         System.out.print("\033[H\033[2J");
-        String name = randomTamagotchi.getClass().getSimpleName();
+        String name = randomTamagotchi.specie;
         System.out.println("Bienvenue dans le jeu Tamagotchi !");
         System.out.println("Nom du Tamagotchi : " + name);
         System.out.println(name + " est un œuf.");
@@ -172,7 +172,7 @@ public class gameEngine {
     }
 
     private void restart() {
-        String name = randomTamagotchi.getClass().getSimpleName();
+        String name = randomTamagotchi.specie;
         System.out.println(name + ": nouvel œuf.");
         currentStage = LifeStage.EGG;
         tamagotchi.happiness = 15;
