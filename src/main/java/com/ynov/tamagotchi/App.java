@@ -9,11 +9,9 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
         SceneLibrary sceneLibrary = new SceneLibrary();
-        Scene homeScene = sceneLibrary.NewHomeScene();
-        Scene eggScene = sceneLibrary.NewEggScene();
+        Scene homeScene = sceneLibrary.NewHomeScene(stage);
         stage.setTitle("Tamagotchi");
         stage.setScene(homeScene);
-        stage.setScene(eggScene);
         stage.show();
     }
 
