@@ -15,6 +15,8 @@ import javafx.stage.Stage;
 import javafx.application.Platform;
 
 public class SceneLibrary {
+    int width = 800;
+    int height = 600;
     public Scene NewHomeScene(Stage stage) {
         String HomeCssPath = getClass().getResource("/style/Home.css").toString();
         var HomeTitle = new Label("Welcome to the game Tamagotchi !");
@@ -32,7 +34,7 @@ public class SceneLibrary {
         hBox.getChildren().addAll(playButton, quitButton);
         VBox vBox = new VBox();
         vBox.getChildren().addAll(HomeTitle, hBox);
-        var homeScene = new Scene(vBox, 640, 480);
+        var homeScene = new Scene(vBox, this.width, this.height);
         homeScene.getStylesheets().add(HomeCssPath);
         return homeScene;
     }
@@ -52,7 +54,7 @@ public class SceneLibrary {
         TextArea textArea = new TextArea(content.toString());
         textArea.setEditable(false);
         StackPane stackPane = new StackPane(textArea);
-        Scene eggScene = new Scene(stackPane, 640, 480);
+        Scene eggScene = new Scene(stackPane, this.width, this.height);
         return eggScene;
     }
 }
