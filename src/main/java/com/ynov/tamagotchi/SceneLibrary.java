@@ -15,8 +15,8 @@ import javafx.stage.Stage;
 import javafx.application.Platform;
 
 public class SceneLibrary {
-    int width = 800;
-    int height = 600;
+    int width = 1024;
+    int height = 768;
     public Scene NewHomeScene(Stage stage) {
         String HomeCssPath = getClass().getResource("/style/Home.css").toString();
         var HomeTitle = new Label("Welcome to the game Tamagotchi !");
@@ -24,7 +24,7 @@ public class SceneLibrary {
         Button playButton = new Button("Play");
         Button quitButton = new Button("Quit");
         playButton.setOnAction(e -> {
-            Scene eggScene = this.NewEggScene();
+            Scene eggScene = this.NewEggScene(stage);
             stage.setScene(eggScene);
         });
         quitButton.setOnAction(e -> {
@@ -39,22 +39,55 @@ public class SceneLibrary {
         return homeScene;
     }
     
-    public Scene NewEggScene() {
+    public Scene NewEggScene(Stage stage) {
         String eggTxtPath = "/templates/egg.txt";
-        InputStream inputStream = getClass().getResourceAsStream(eggTxtPath);
+        StackPane stackPane = new StackPane();
+        Button buttonNext = new Button("Open egg");
+        buttonNext.setOnAction(e-> {
+            Scene lionScene = this.NewLionScene(stage, "adult");
+            stage.setScene(lionScene);
+        });
+        stackPane.getChildren().addAll(openTxtFile(eggTxtPath), buttonNext);
+        Scene eggScene = new Scene(stackPane, this.width, this.height);
+        return eggScene;
+    }
+
+    public Scene NewLionScene(Stage stage, String lifeState) {
+        String txtPath = "/templates/lion/" + lifeState + ".txt";
+        System.out.println(txtPath);
+        StackPane stackPane = new StackPane(openTxtFile(txtPath));
+        Scene scene = new Scene(stackPane, this.width, this.height);
+        return scene;
+    }
+
+    private TextArea openTxtFile(String path) {
+        InputStream inputStream = getClass().getResourceAsStream(path);
         StringBuilder content = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                content.append(line).append("\n");
+                boolean doubleSpace = false;
+                StringBuilder modifiedLine = new StringBuilder();
+                for (int i = 0; i < line.length(); i++) {
+                    char currentChar = line.charAt(i);
+                    if (currentChar == ' ') {
+                        if (doubleSpace) {
+                            modifiedLine.append("   ");
+                        } else {
+                            modifiedLine.append("  ");
+                        }
+                        doubleSpace = !doubleSpace;
+                    } else {
+                        modifiedLine.append(currentChar);
+                    }
+                }
+                content.append(modifiedLine).append("\n");
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
         TextArea textArea = new TextArea(content.toString());
         textArea.setEditable(false);
-        StackPane stackPane = new StackPane(textArea);
-        Scene eggScene = new Scene(stackPane, this.width, this.height);
-        return eggScene;
+        return textArea;
     }
 }
