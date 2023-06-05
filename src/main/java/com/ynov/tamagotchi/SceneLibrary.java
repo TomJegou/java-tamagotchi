@@ -11,7 +11,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 
 public class SceneLibrary {
     public Scene NewHomeScene() {
