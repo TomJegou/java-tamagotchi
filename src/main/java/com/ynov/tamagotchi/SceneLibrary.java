@@ -14,18 +14,12 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class SceneLibrary {
-    public Scene NewHomeScene(Stage stage) {
+    public Scene NewHomeScene() {
         String HomeCssPath = getClass().getResource("/style/Home.css").toString();
         var HomeTitle = new Label("Welcome to the game Tamagotchi !");
         HomeTitle.setId("home-title");
         Button playButton = new Button("Play");
         Button quitButton = new Button("Quit");
-        playButton.setOnAction(e -> {
-
-        });
-        quitButton.setOnAction(e -> {
-            
-        });
         HBox hBox = new HBox();
         hBox.getChildren().addAll(playButton, quitButton);
         VBox vBox = new VBox();
