@@ -4,6 +4,7 @@ import java.util.Random;
 
 public class Tamagotchi {
     String name;
+    String specie;
     int happiness = 15;
     boolean cleanness = true ;
     public int daywhitouteating = 0;
