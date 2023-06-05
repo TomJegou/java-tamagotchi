@@ -44,7 +44,7 @@ public class SceneLibrary {
         StackPane stackPane = new StackPane();
         Button buttonNext = new Button("Open egg");
         buttonNext.setOnAction(e-> {
-            Scene lionScene = this.NewLionScene(stage, "adult");
+            Scene lionScene = this.NewLionScene(stage, "baby");
             stage.setScene(lionScene);
         });
         stackPane.getChildren().addAll(openTxtFile(eggTxtPath), buttonNext);
