@@ -17,6 +17,7 @@ import javafx.application.Platform;
 public class SceneLibrary {
     int width = 1024;
     int height = 768;
+    Tamagotchi tamagotchi;
     public Scene NewHomeScene(Stage stage) {
         String HomeCssPath = getClass().getResource("/style/Home.css").toString();
         var HomeTitle = new Label("Welcome to the game Tamagotchi !");
@@ -44,20 +45,20 @@ public class SceneLibrary {
         StackPane stackPane = new StackPane();
         Button buttonNext = new Button("Open egg");
         buttonNext.setOnAction(e-> {
-            Scene lionScene = this.NewLionScene(stage, "baby");
-            stage.setScene(lionScene);
+            this.tamagotchi = Tools.getRandomTamagotchi();
+            Scene nextScne;
+            nextScne = this.InputBabyName(stage, this.tamagotchi.specie);
+            stage.setScene(nextScne);
         });
         stackPane.getChildren().addAll(openTxtFile(eggTxtPath), buttonNext);
         Scene eggScene = new Scene(stackPane, this.width, this.height);
         return eggScene;
     }
 
-    public Scene NewLionScene(Stage stage, String lifeState) {
-        String txtPath = "/templates/lion/" + lifeState + ".txt";
-        System.out.println(txtPath);
+    public Scene InputBabyName(Stage stage, String specie) {
+        String txtPath = "/templates/" +specie + "/baby.txt";
         StackPane stackPane = new StackPane(openTxtFile(txtPath));
-        Scene scene = new Scene(stackPane, this.width, this.height);
-        return scene;
+        return new Scene(stackPane, this.width, this.height);
     }
 
     private TextArea openTxtFile(String path) {
