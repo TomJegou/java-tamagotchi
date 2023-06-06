@@ -3,13 +3,14 @@ package com.ynov.tamagotchi;
 import java.util.Random;
 
 public class Tamagotchi {
-    String name;
-    String specie;
-    int happiness = 15;
-    boolean cleanness = true ;
+    public String name = "";
+    public String specie = "";
+    public String lifeState = "baby";
+    public boolean cleanness = true ;
+    public boolean eat = false;
+    public boolean sick = false;
+    public int happiness = 15;
     public int daywhitouteating = 0;
-    boolean eat;
-    boolean sick =false;
 
     public void Eat(){
         this.eat = true;
