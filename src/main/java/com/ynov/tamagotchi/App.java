@@ -8,8 +8,8 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) {
-        SceneLibrary sceneLibrary = new SceneLibrary();
-        Scene homeScene = sceneLibrary.NewHomeScene(stage);
+        SceneOrchestror sceneLibrary = new SceneOrchestror(stage, 1024, 768);
+        Scene homeScene = sceneLibrary.NewHomeScene();
         stage.setTitle("Tamagotchi");
         stage.setScene(homeScene);
         stage.show();
