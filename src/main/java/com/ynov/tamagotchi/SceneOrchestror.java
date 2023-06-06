@@ -50,14 +50,12 @@ public class SceneOrchestror{
     
     public Scene NewEggScene() {
         String eggTxtPath = "/templates/egg.txt";
-        StackPane stackPane = new StackPane();
         Button buttonNext = new Button("Open egg");
         buttonNext.setOnAction(e-> {
             this.tamagotchi = Tools.getRandomTamagotchi();
             this.stage.setScene(this.InputBabyName());
         });
-        stackPane.getChildren().addAll(openTxtFile(eggTxtPath), buttonNext);
-        return new Scene(stackPane, this.width, this.height);
+        return new Scene(new VBox(openTxtFile(eggTxtPath), buttonNext), this.width, this.height);
     }
 
     public Scene InputBabyName() {
@@ -77,7 +75,32 @@ public class SceneOrchestror{
     public Scene Menu() {
         String txtPath = "/templates/" +this.tamagotchi.specie + "/"+ this.tamagotchi.lifeState +".txt";
         Label label = new Label("Your Action:");
-        VBox body = new VBox(openTxtFile(txtPath), label);
+        Button eatButton = new Button("Eat");
+        eatButton.setOnAction(e -> {
+            
+        });
+        Button playButton = new Button("Play");
+        playButton.setOnAction(e -> {
+            
+        });
+        Button cleanTamagotchiButton = new Button("Clean");
+        cleanTamagotchiButton.setOnAction(e -> {
+            
+        });
+        Button healButton = new Button("Heal");
+        healButton.setOnAction(e -> {
+            
+        });
+        Button doNothingButton = new Button("Do nothing");
+        doNothingButton.setOnAction(e -> {
+            
+        });
+        Button quitButton = new Button("Quit");
+        quitButton.setOnAction(e -> {
+            Platform.exit();
+        });
+        HBox hbox = new HBox(eatButton, playButton, cleanTamagotchiButton, healButton, doNothingButton, quitButton);
+        VBox body = new VBox(openTxtFile(txtPath), label, hbox);
         return new Scene(body, width, height);
     }
 
@@ -109,7 +132,7 @@ public class SceneOrchestror{
         }
         TextArea textArea = new TextArea(content.toString());
         textArea.setEditable(false);
-        textArea.setPrefSize(width, height);
+        textArea.setPrefSize(width, height-100);
         return textArea;
     }
 }
