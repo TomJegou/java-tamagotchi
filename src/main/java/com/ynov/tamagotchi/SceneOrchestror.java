@@ -16,7 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.application.Platform;
 
-public class SceneOrchestror implements Serializable{
+public class SceneOrchestror {
     int width = 1024;
     int height = 768;
     Stage stage;
@@ -98,6 +98,7 @@ public class SceneOrchestror implements Serializable{
         });
         Button quitButton = new Button("Quit");
         quitButton.setOnAction(e -> {
+            Save.serializeData(this.tamagotchi, "save");
             Platform.exit();
         });
         HBox hbox = new HBox(eatButton, playButton, cleanTamagotchiButton, healButton, doNothingButton, quitButton);
