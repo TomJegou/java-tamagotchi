@@ -3,11 +3,12 @@ package com.ynov.tamagotchi;
 
 import java.util.Scanner;
 import java.util.List;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import java.util.concurrent.TimeUnit;
 
-public class gameEngine {
+public class gameEngine implements Serializable {
     private enum LifeStage {
         EGG,
         BABY,

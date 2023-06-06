@@ -1,8 +1,9 @@
 package com.ynov.tamagotchi;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Tamagotchi {
+public class Tamagotchi implements Serializable {
     public String name = "";
     public String specie = "";
     public String lifeState = "baby";
