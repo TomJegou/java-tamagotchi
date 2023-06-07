@@ -91,6 +91,7 @@ public class SceneOrchestror {
         Label stateHunger;
         Label sickLabel;
         Label cleanessLabel;
+        Label dayLivedLabel = new Label(this.tamagotchi.name + " has lived " + this.tamagotchi.dayLived);
         if (this.tamagotchi.daywhitouteating > 1) {
             stateHunger = new Label(this.tamagotchi.name + " is hungry");
         } else {
@@ -106,14 +107,16 @@ public class SceneOrchestror {
         } else {
             cleanessLabel = new Label(this.tamagotchi.name + " is dirty");
         }
-        VBox vBoxInfoTamagotchi = new VBox(lifeStateLabel, hapinessLabel, nameLabel, stateHunger, sickLabel, cleanessLabel);
+        VBox vBoxInfoTamagotchi = new VBox(lifeStateLabel, hapinessLabel, nameLabel, stateHunger, sickLabel, cleanessLabel, dayLivedLabel);
         Button eatButton = new Button("Eat");
         eatButton.setOnAction(e -> {
             this.tamagotchi.Eat();
             this.tamagotchi.getHold();
             if (this.tamagotchi.isDead) {
                 this.stage.setScene(this.newDeadScene());
+                return;
             }
+            this.stage.setScene(this.Menu());
         });
         Button playButton = new Button("Play");
         playButton.setOnAction(e -> {
@@ -121,7 +124,9 @@ public class SceneOrchestror {
             this.tamagotchi.getHold();
             if (this.tamagotchi.isDead) {
                 this.stage.setScene(this.newDeadScene());
+                return;
             }
+            this.stage.setScene(this.Menu());
         });
         Button cleanTamagotchiButton = new Button("Clean");
         cleanTamagotchiButton.setOnAction(e -> {
@@ -129,7 +134,9 @@ public class SceneOrchestror {
             this.tamagotchi.getHold();
             if (this.tamagotchi.isDead) {
                 this.stage.setScene(this.newDeadScene());
+                return;
             }
+            this.stage.setScene(this.Menu());
         });
         Button healButton = new Button("Heal");
         healButton.setOnAction(e -> {
@@ -137,14 +144,18 @@ public class SceneOrchestror {
             this.tamagotchi.getHold();
             if (this.tamagotchi.isDead) {
                 this.stage.setScene(this.newDeadScene());
+                return;
             }
+            this.stage.setScene(this.Menu());
         });
         Button doNothingButton = new Button("Do nothing");
         doNothingButton.setOnAction(e -> {
             this.tamagotchi.getHold();
             if (this.tamagotchi.isDead) {
                 this.stage.setScene(this.newDeadScene());
+                return;
             }
+            this.stage.setScene(this.Menu());
         });
         Button quitButton = new Button("Quit");
         quitButton.setOnAction(e -> {
@@ -163,7 +174,7 @@ public class SceneOrchestror {
             Platform.exit();
         });
         VBox vbox = new VBox(deadMessage, quiButton);
-        return new Scene(vbox);
+        return new Scene(vbox, width, height);
     }
 
     private TextArea openTxtFile(String path) {
