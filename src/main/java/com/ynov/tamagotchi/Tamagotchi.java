@@ -6,33 +6,45 @@ import java.util.Random;
 public class Tamagotchi implements Serializable {
     public String name = "";
     public String specie = "";
-    public String lifeState = "baby";
+    public String lifeState = LifeStateEnum.baby.toString();
     public boolean cleanness = true;
     public boolean eat = false;
     public boolean sick = false;
+    public boolean isDead = false;
     public int happiness = 15;
     public int daywhitouteating = 0;
     public int dayLived = 0;
 
-    public void Eat(){
+    public void Eat() {
         this.eat = true;
         daywhitouteating = 0;
     }
 
-    public void Play(){
+    public void Play() {
         this.happiness += 3;
         if (this.happiness >= 50){
             this.happiness = 50;
         }
     }
+
     public void cleaning(){
         this.cleanness = true;
     }
+
     public void Healing(){
         this.sick = false;
     }
 
-    public void disease(){
+    public void getHold() {
+        this.dayLived++;
+        if (this.dayLived == 5) {
+            this.lifeState = LifeStateEnum.adult.toString();
+        } else if (this.dayLived == 10) {
+            this.isDead = true;
+        }
+    }
+
+    public void disease() {
         Random random = new Random();
         int randomNumber = random.nextInt(3); 
         if (randomNumber == 0) {
