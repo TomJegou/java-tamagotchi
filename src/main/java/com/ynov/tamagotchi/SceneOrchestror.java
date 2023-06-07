@@ -111,7 +111,8 @@ public class SceneOrchestror {
         Button eatButton = new Button("Eat");
         eatButton.setOnAction(e -> {
             this.tamagotchi.Eat();
-            this.tamagotchi.getHold();
+            this.tamagotchi.happiness++;
+            this.tamagotchi.getOld();
             if (this.tamagotchi.isDead) {
                 this.stage.setScene(this.newDeadScene());
                 return;
@@ -121,7 +122,7 @@ public class SceneOrchestror {
         Button playButton = new Button("Play");
         playButton.setOnAction(e -> {
             this.tamagotchi.Play();
-            this.tamagotchi.getHold();
+            this.tamagotchi.getOld();
             if (this.tamagotchi.isDead) {
                 this.stage.setScene(this.newDeadScene());
                 return;
@@ -131,7 +132,8 @@ public class SceneOrchestror {
         Button cleanTamagotchiButton = new Button("Clean");
         cleanTamagotchiButton.setOnAction(e -> {
             this.tamagotchi.cleaning();
-            this.tamagotchi.getHold();
+            this.tamagotchi.happiness++;
+            this.tamagotchi.getOld();
             if (this.tamagotchi.isDead) {
                 this.stage.setScene(this.newDeadScene());
                 return;
@@ -141,7 +143,8 @@ public class SceneOrchestror {
         Button healButton = new Button("Heal");
         healButton.setOnAction(e -> {
             this.tamagotchi.Healing();
-            this.tamagotchi.getHold();
+            this.tamagotchi.happiness++;
+            this.tamagotchi.getOld();
             if (this.tamagotchi.isDead) {
                 this.stage.setScene(this.newDeadScene());
                 return;
@@ -150,7 +153,8 @@ public class SceneOrchestror {
         });
         Button doNothingButton = new Button("Do nothing");
         doNothingButton.setOnAction(e -> {
-            this.tamagotchi.getHold();
+            this.tamagotchi.getOld();
+            this.tamagotchi.happiness--;
             if (this.tamagotchi.isDead) {
                 this.stage.setScene(this.newDeadScene());
                 return;

@@ -35,12 +35,17 @@ public class Tamagotchi implements Serializable {
         this.sick = false;
     }
 
-    public void getHold() {
+    public void getOld() {
         this.dayLived++;
-        if (this.dayLived == 5) {
+        if (this.dayLived >= 5 && this.dayLived < 10) {
             this.lifeState = LifeStateEnum.adult.toString();
-        } else if (this.dayLived == 10) {
+        } else if (this.dayLived >= 10 && this.dayLived < 15) {
+            this.lifeState = LifeStateEnum.old.toString();
+        } else if (this.dayLived >= 15) {
             this.isDead = true;
+        }
+        if (this.lifeState ==  LifeStateEnum.old.toString()) {
+            this.disease();
         }
     }
 

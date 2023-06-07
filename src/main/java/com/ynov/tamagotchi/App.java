@@ -14,7 +14,7 @@ public class App extends Application {
         stage.setScene(homeScene);
         stage.show();
     }
-
+    
     public static void main(String[] args) {
         launch();
     }
