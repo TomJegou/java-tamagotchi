@@ -13,9 +13,9 @@ public class Tamagotchi implements Serializable {
     public boolean isDead = false;
     public int happiness = 15;
     public int dayWhitOutEating = 0;
-    public int dayWithoutCleaning = 0;
-    public int dayLivedAsAdult = 0;
-    public int dayLivedAsOld = 0;
+    protected int dayWithoutCleaning = 0;
+    protected int dayLivedAsAdult = 0;
+    protected int dayLivedAsOld = 0;
 
     public void Eat() {
         this.eat = true;

@@ -17,10 +17,10 @@ import javafx.stage.Stage;
 import javafx.application.Platform;
 
 public class SceneOrchestror {
-    int width = 1024;
-    int height = 768;
-    Stage stage;
-    Tamagotchi tamagotchi;
+    private int width = 1024;
+    private int height = 768;
+    private Stage stage;
+    private Tamagotchi tamagotchi;
 
     public SceneOrchestror(Stage stage, int w, int h) {
         this.height = h;
@@ -58,7 +58,7 @@ public class SceneOrchestror {
         return homeScene;
     }
     
-    public Scene NewEggScene() {
+    private Scene NewEggScene() {
         String eggTxtPath = "/templates/egg.txt";
         Button buttonNext = new Button("Open egg");
         buttonNext.setOnAction(e-> {
@@ -68,7 +68,7 @@ public class SceneOrchestror {
         return new Scene(new VBox(openTxtFile(eggTxtPath), buttonNext), this.width, this.height);
     }
 
-    public Scene InputBabyName() {
+    private Scene InputBabyName() {
         String txtPath = "/templates/" + this.tamagotchi.specie + "/baby.txt";
         TextField textField = new TextField(this.tamagotchi.specie);
         Button buttonSubmit = new Button("submit");
@@ -82,7 +82,7 @@ public class SceneOrchestror {
         return new Scene(body, this.width, this.height);
     }
 
-    public Scene Menu() {
+    private Scene Menu() {
         String txtPath = "/templates/" +this.tamagotchi.specie + "/"+ this.tamagotchi.lifeState +".txt";
         Label label = new Label("Your Action:");
         Label lifeStateLabel = new Label("Age: " + this.tamagotchi.lifeState);
@@ -173,7 +173,7 @@ public class SceneOrchestror {
         return new Scene(body, width, height);
     }
 
-    public Scene newDeadScene() {
+    private Scene newDeadScene() {
         Label deadMessage = new Label(this.tamagotchi.name + "is Dead sorry, start a new game !");
         Button quiButton = new Button("Quit");
         quiButton.setOnAction(e -> {
