@@ -7,11 +7,12 @@ public class Tamagotchi implements Serializable {
     public String name = "";
     public String specie = "";
     public String lifeState = "baby";
-    public boolean cleanness = true ;
+    public boolean cleanness = true;
     public boolean eat = false;
     public boolean sick = false;
     public int happiness = 15;
     public int daywhitouteating = 0;
+    public int dayLived = 0;
 
     public void Eat(){
         this.eat = true;
@@ -29,14 +30,6 @@ public class Tamagotchi implements Serializable {
     }
     public void Healing(){
         this.sick = false;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public boolean isSick() {
-        return this.sick;
     }
 
     public void disease(){

@@ -31,7 +31,7 @@ public class gameEngine implements Serializable {
         if (tamagotchi.cleanness==false){
             tamagotchi.happiness -=3;
         }
-        if (tamagotchi.isSick()) {
+        if (tamagotchi.sick) {
             tamagotchi.happiness -= 5;
         }
         if(tamagotchi.happiness <0){
@@ -167,7 +167,7 @@ public class gameEngine implements Serializable {
             currentStage = LifeStage.ADULT;
         } else if (currentStage == LifeStage.ADULT && dayCounter > 15) {
             currentStage = LifeStage.ELDERLY;
-        } else if (currentStage == LifeStage.ELDERLY && tamagotchi.isSick()==true) {
+        } else if (currentStage == LifeStage.ELDERLY && tamagotchi.sick) {
             currentStage = LifeStage.DEAD;
         }
     }

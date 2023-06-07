@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -34,7 +35,13 @@ public class SceneOrchestror {
         Button playButton = new Button("Play");
         Button quitButton = new Button("Quit");
         playButton.setOnAction(e -> {
-            this.stage.setScene(this.NewEggScene());
+            File saveFile = new File("save");
+            if (saveFile.exists()) {
+                this.tamagotchi = (Tamagotchi) Save.deserializeData("save");
+                this.stage.setScene(this.Menu());
+            } else {
+                this.stage.setScene(this.NewEggScene());
+            }
         });
         quitButton.setOnAction(e -> {
             Platform.exit();
@@ -75,6 +82,28 @@ public class SceneOrchestror {
     public Scene Menu() {
         String txtPath = "/templates/" +this.tamagotchi.specie + "/"+ this.tamagotchi.lifeState +".txt";
         Label label = new Label("Your Action:");
+        Label lifeStateLabel = new Label("Age: " + this.tamagotchi.lifeState);
+        Label hapinessLabel = new Label("Hapiness: " + Integer.toString(this.tamagotchi.happiness));
+        Label nameLabel = new Label("Name: " + this.tamagotchi.name);
+        Label stateHunger;
+        Label sickLabel;
+        Label cleanessLabel;
+        if (this.tamagotchi.daywhitouteating > 1) {
+            stateHunger = new Label(this.tamagotchi.name + " is hungry");
+        } else {
+            stateHunger = new Label(this.tamagotchi.name +  " is not Hungry");
+        }
+        if (this.tamagotchi.sick) {
+            sickLabel = new Label(this.tamagotchi.name + " is sick");
+        } else {
+            sickLabel = new Label(this.tamagotchi.name + " is in good Health");
+        }
+        if (this.tamagotchi.cleanness) {
+            cleanessLabel = new Label(this.tamagotchi.name + " is clean");
+        } else {
+            cleanessLabel = new Label(this.tamagotchi.name + " is dirty");
+        }
+        VBox vBoxInfoTamagotchi = new VBox(lifeStateLabel, hapinessLabel, nameLabel, stateHunger, sickLabel, cleanessLabel);
         Button eatButton = new Button("Eat");
         eatButton.setOnAction(e -> {
             
@@ -101,7 +130,7 @@ public class SceneOrchestror {
             Platform.exit();
         });
         HBox hbox = new HBox(eatButton, playButton, cleanTamagotchiButton, healButton, doNothingButton, quitButton);
-        VBox body = new VBox(openTxtFile(txtPath), label, hbox);
+        VBox body = new VBox(openTxtFile(txtPath), vBoxInfoTamagotchi, label, hbox);
         return new Scene(body, width, height);
     }
 
