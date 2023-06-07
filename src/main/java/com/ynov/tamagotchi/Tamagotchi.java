@@ -12,12 +12,14 @@ public class Tamagotchi implements Serializable {
     public boolean sick = false;
     public boolean isDead = false;
     public int happiness = 15;
-    public int daywhitouteating = 0;
-    public int dayLived = 0;
+    public int dayWhitOutEating = 0;
+    public int dayWithoutCleaning = 0;
+    public int dayLivedAsAdult = 0;
+    public int dayLivedAsOld = 0;
 
     public void Eat() {
         this.eat = true;
-        daywhitouteating = 0;
+        dayWhitOutEating = 0;
     }
 
     public void Play() {
@@ -36,16 +38,27 @@ public class Tamagotchi implements Serializable {
     }
 
     public void getOld() {
-        this.dayLived++;
-        if (this.dayLived >= 5 && this.dayLived < 10) {
+        this.dayWhitOutEating++;
+        if (this.happiness >= 40 && this.lifeState  == LifeStateEnum.baby.toString()) {
             this.lifeState = LifeStateEnum.adult.toString();
-        } else if (this.dayLived >= 10 && this.dayLived < 15) {
-            this.lifeState = LifeStateEnum.old.toString();
-        } else if (this.dayLived >= 15) {
-            this.isDead = true;
-        }
-        if (this.lifeState ==  LifeStateEnum.old.toString()) {
+        } else if (this.lifeState == LifeStateEnum.adult.toString()) {
+            if (this.dayLivedAsAdult >= 15) {
+                this.lifeState = LifeStateEnum.old.toString();
+            }
+            this.dayLivedAsAdult++;
+        } else if (this.lifeState == LifeStateEnum.old.toString()) {
+            if (this.dayLivedAsOld >= 5) {
+                this.isDead = true;
+            }
+            this.dayLivedAsOld++;
             this.disease();
+        }
+        if (this.dayWhitOutEating > 3) {
+            this.happiness -= 5;
+        }
+        if (this.dayWithoutCleaning > 2) {
+            this.happiness--;
+            this.cleanness = false;
         }
     }
 

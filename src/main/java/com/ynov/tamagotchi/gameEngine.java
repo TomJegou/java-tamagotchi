@@ -47,8 +47,8 @@ public class gameEngine implements Serializable {
         timeCounter++;
         if (timeCounter == unitTime) {
             if(tamagotchi.eat == false){
-                tamagotchi.daywhitouteating += 1;
-                tamagotchi.happiness -= 5*tamagotchi.daywhitouteating;
+                tamagotchi.dayWhitOutEating += 1;
+                tamagotchi.happiness -= 5*tamagotchi.dayWhitOutEating;
             }
             else{
                 tamagotchi.eat = false;

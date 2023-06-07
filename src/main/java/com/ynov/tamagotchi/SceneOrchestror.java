@@ -91,8 +91,7 @@ public class SceneOrchestror {
         Label stateHunger;
         Label sickLabel;
         Label cleanessLabel;
-        Label dayLivedLabel = new Label(this.tamagotchi.name + " has lived " + this.tamagotchi.dayLived);
-        if (this.tamagotchi.daywhitouteating > 1) {
+        if (this.tamagotchi.dayWhitOutEating > 3) {
             stateHunger = new Label(this.tamagotchi.name + " is hungry");
         } else {
             stateHunger = new Label(this.tamagotchi.name +  " is not Hungry");
@@ -107,11 +106,11 @@ public class SceneOrchestror {
         } else {
             cleanessLabel = new Label(this.tamagotchi.name + " is dirty");
         }
-        VBox vBoxInfoTamagotchi = new VBox(lifeStateLabel, hapinessLabel, nameLabel, stateHunger, sickLabel, cleanessLabel, dayLivedLabel);
+        VBox vBoxInfoTamagotchi = new VBox(lifeStateLabel, hapinessLabel, nameLabel, stateHunger, sickLabel, cleanessLabel);
         Button eatButton = new Button("Eat");
         eatButton.setOnAction(e -> {
             this.tamagotchi.Eat();
-            this.tamagotchi.happiness++;
+            this.tamagotchi.happiness += 10;
             this.tamagotchi.getOld();
             if (this.tamagotchi.isDead) {
                 this.stage.setScene(this.newDeadScene());
@@ -155,6 +154,9 @@ public class SceneOrchestror {
         doNothingButton.setOnAction(e -> {
             this.tamagotchi.getOld();
             this.tamagotchi.happiness--;
+            if (this.tamagotchi.happiness == 0) {
+                this.tamagotchi.isDead = true;
+            }
             if (this.tamagotchi.isDead) {
                 this.stage.setScene(this.newDeadScene());
                 return;
@@ -177,7 +179,12 @@ public class SceneOrchestror {
         quiButton.setOnAction(e -> {
             Platform.exit();
         });
-        VBox vbox = new VBox(deadMessage, quiButton);
+        Button playAgainButton = new Button("Play again");
+        playAgainButton.setOnAction(e -> {
+            this.stage.setScene(this.NewEggScene());
+            return; 
+        });
+        VBox vbox = new VBox(deadMessage, quiButton, playAgainButton);
         return new Scene(vbox, width, height);
     }
 
