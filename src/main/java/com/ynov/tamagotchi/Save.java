@@ -7,7 +7,6 @@ import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 
 public class Save {
-    String savePath = getClass().getResourceAsStream(null).toString();
     public static void serializeData(Object data, String DataSer) {
         try{
             FileOutputStream fileOut = new FileOutputStream(DataSer);
