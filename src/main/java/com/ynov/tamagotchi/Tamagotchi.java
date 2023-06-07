@@ -31,6 +31,7 @@ public class Tamagotchi implements Serializable {
 
     public void cleaning(){
         this.cleanness = true;
+        this.dayWithoutCleaning = 0;
     }
 
     public void Healing(){
@@ -39,6 +40,7 @@ public class Tamagotchi implements Serializable {
 
     public void getOld() {
         this.dayWhitOutEating++;
+        this.dayWithoutCleaning++;
         if (this.happiness >= 40 && this.lifeState  == LifeStateEnum.baby.toString()) {
             this.lifeState = LifeStateEnum.adult.toString();
         } else if (this.lifeState == LifeStateEnum.adult.toString()) {
@@ -49,6 +51,7 @@ public class Tamagotchi implements Serializable {
         } else if (this.lifeState == LifeStateEnum.old.toString()) {
             if (this.dayLivedAsOld >= 5) {
                 this.isDead = true;
+                return;
             }
             this.dayLivedAsOld++;
             this.disease();
@@ -59,6 +62,9 @@ public class Tamagotchi implements Serializable {
         if (this.dayWithoutCleaning > 2) {
             this.happiness--;
             this.cleanness = false;
+        }
+        if (this.happiness <= 0) {
+            this.isDead = true;
         }
     }
 
