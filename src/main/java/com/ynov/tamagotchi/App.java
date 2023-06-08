@@ -2,29 +2,20 @@ package com.ynov.tamagotchi;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-
-/**
- * JavaFX App
- */
 public class App extends Application {
 
     @Override
     public void start(Stage stage) {
-        var javaVersion = SystemInfo.javaVersion();
-        var javafxVersion = SystemInfo.javafxVersion();
-
-        var label = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
-        var scene = new Scene(new StackPane(label), 640, 480);
-        stage.setScene(scene);
+        SceneOrchestror sceneLibrary = new SceneOrchestror(stage, 1024, 768);
+        Scene homeScene = sceneLibrary.NewHomeScene();
+        stage.setTitle("Tamagotchi");
+        stage.setScene(homeScene);
         stage.show();
     }
-
+    
     public static void main(String[] args) {
         launch();
     }
-
 }
